@@ -1,35 +1,57 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from "react";
+import { PRODUCTS } from "./products";
+import ProductCard from "./components/ProductCard";
+import Cart from "./components/Cart";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [cart, setCart] = useState(() => {
+    const saved = localStorage.getItem("cart");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  const addToCart = (id, change) => {
+    setCart(prev => {
+      const exists = prev.find(item => item.id === id);
+      if (exists) {
+        const updated = prev
+          .map(item =>
+            item.id === id ? { ...item, qty: item.qty + change } : item
+          )
+          .filter(item => item.qty > 0);
+        return updated;
+      }
+      return [...prev, { id, qty: 1 }];
+    });
+  };
+
+  const removeFromCart = (id) => {
+    setCart(prev => prev.filter(item => item.id !== id));
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="app">
+      <div className="container">
+        <h1 className="title">Desserts</h1>
+        <div className="layout">
+          <div className="products">
+            {PRODUCTS.map(p => {
+              const item = cart.find(c => c.id === p.id);
+              return (
+                <ProductCard key={p.id} product={p} qty={item?.qty || 0} addToCart={addToCart}
+                />
+              );
+            })}
+          </div>
+          <Cart cart={cart} products={PRODUCTS} addToCart={addToCart} removeFromCart={removeFromCart}
+          />
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
