@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { PRODUCTS } from "./products";
-import ProductCard from "./components/ProductCard";
-import Cart from "./components/Cart";
+import ProductCard from "./Components/ProductCard";
+import Cart from "./Components/Cart";
 import "./App.css";
 
 export default function App() {
