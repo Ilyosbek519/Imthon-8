@@ -9,6 +9,12 @@ body {
   padding: 20px;
 }
 
+@media (max-width: 767px) {
+  .app {
+    padding: 12px;
+  }
+}
+
 .container {
   max-width: 1200px;
   margin: auto;
@@ -20,16 +26,51 @@ body {
   margin-bottom: 20px;
 }
 
+@media (max-width: 767px) {
+  .title {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+}
+
 .layout {
   display: flex;
-  gap: 10px;
+  gap: 20px;
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .layout {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .layout {
+    flex-direction: column;
+    gap: 20px;
+  }
 }
 
 .products {
   flex: 2;
   display: grid;
-  grid-template-columns: repeat(3, 2fr); 
+  grid-template-columns: repeat(3, 1fr); 
   gap: 20px;
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .products {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }
 
 .product-card {
@@ -39,6 +80,12 @@ body {
   background: white;
   display: flex;
   flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .product-img-wrap {
@@ -47,7 +94,15 @@ body {
 
 .product-img {
   width: 100%;
+  height: 200px;
+  object-fit: cover;
   display: block;
+}
+
+@media (max-width: 767px) {
+  .product-img {
+    height: 180px;
+  }
 }
 
 .qty-badge {
@@ -62,10 +117,21 @@ body {
   display: flex;
   align-items: center;
   gap: 4px;
+  min-width: 44px;
+  justify-content: center;
 }
 
 .product-info {
   padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 767px) {
+  .product-info {
+    padding: 12px;
+  }
 }
 
 .subtitle {
@@ -73,85 +139,153 @@ body {
   font-size: 0.9rem;
   margin: 0;
 }
-.product-id{
-  font-family: Red Hat Text;
-font-weight: 400;
-color: #87635A;
-font-style: Regular;
-font-size: font-size/text-preset-4;
 
-line-height: 100%;
-letter-spacing: 0%;
-
+.product-id {
+  font-family: 'Red Hat Text', Arial, sans-serif;
+  font-weight: 400;
+  color: #87635A;
+  font-size: 0.85rem;
+  line-height: 100%;
+  letter-spacing: 0%;
 }
+
 .product-title {
   margin: 4px 0;
   font-size: 1.1rem;
+  font-weight: 600;
+}
+
+@media (max-width: 767px) {
+  .product-title {
+    font-size: 1rem;
+  }
 }
 
 .price {
   font-weight: bold;
   margin: 8px 0;
+  color: #C73B0F;
+  font-size: 1.1rem;
 }
 
 .actions {
-  margin-top: 10px;
+  margin-top: auto;
+  padding-top: 10px;
 }
 
 .add-btn {
   width: 100%;
   background: #FFFFFF;
   color: rgb(0, 0, 0);
-  padding: 8px;
-  border:1px solid ;
+  padding: 12px 8px;
+  border: 1px solid #ccc;
   border-radius: 999px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  min-height: 44px;
+}
+
+.add-btn:hover {
+  border-color: #C73B0F;
+  color: #C73B0F;
+  transform: translateY(-1px);
 }
 
 .qty-control {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   background: #C73B0F;
-  padding: 6px;
+  padding: 8px 16px;
   color: white;
   border-radius: 999px;
+  min-height: 44px;
 }
 
 .qty-control button {
   background: none;
-  border: none;
-  font-size: 1.0.5rem;
+  border: 1px solid white;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 1rem;
   cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.qty-control button:hover {
+  background: white;
+  color: #C73B0F;
 }
 
 .qty-control span {
   font-weight: bold;
+  font-size: 1rem;
 }
 
 .cart {
   flex: 1;
   background: white;
   border: 1px solid #eee;
-  padding: 16px;
+  padding: 20px;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  height: fit-content;
+  position: sticky;
+  top: 20px;
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .cart {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .cart {
+    position: static;
+    padding: 16px;
+    margin-top: 0;
+  }
 }
 
 .cart h2 {
   margin: 0;
+  font-size: 1.5rem;
+}
+
+.your-cart {
+  font-family: 'Red Hat Text', Arial, sans-serif;
+  color: #C73B0F;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+@media (max-width: 767px) {
+  .your-cart {
+    font-size: 1.25rem;
+  }
 }
 
 .cart-item {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .cart_item_img {
@@ -159,26 +293,47 @@ letter-spacing: 0%;
   height: 60px;
   border-radius: 6px;
   object-fit: cover;
+  flex-shrink: 0;
+}
+
+@media (max-width: 767px) {
+  .cart_item_img {
+    width: 50px;
+    height: 50px;
+  }
 }
 
 .cart-item-info {
   flex: 1;
+  min-width: 0;
 }
 
 .cart-item-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  margin-bottom: 8px;
 }
 
 .cart-item-bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 767px) {
+  .cart-item-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 }
 
 .cart-item-bottom .qty-control.small {
   gap: 6px;
+  padding: 4px 12px;
+  min-height: 36px;
 }
 
 .total {
@@ -196,47 +351,77 @@ letter-spacing: 0%;
   align-items: center;
   gap: 8px;
   background: #f4f4f4;
-  padding: 6px 8px;
+  padding: 8px 12px;
   border-radius: 6px;
   font-size: 0.85rem;
+}
+
+.added-items {
+  font-family: 'Red Hat Text', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #666;
 }
 
 .order-total {
   display: flex;
   justify-content: space-between;
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  padding: 16px 0;
+  border-top: 1px solid #eee;
 }
 
 .confirm-btn {
   background: #C73B0F;
   color: white;
   border: none;
-  padding: 10px;
+  padding: 14px 20px;
   border-radius: 999px;
   cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  min-height: 48px;
 }
 
 .confirm-btn:hover {
   background: #e6740b;
+  transform: translateY(-1px);
 }
 
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5); /* Orqa fon yarim qoraygan */
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 50;
+  padding: 20px;
 }
 
 .modal {
   background: white;
   border-radius: 16px;
   padding: 24px;
-  width: 360px;
+  width: 100%;
+  max-width: 400px;
   text-align: center;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@media (max-width: 767px) {
+  .modal {
+    padding: 20px;
+    margin: 20px;
+    max-width: none;
+    width: calc(100% - 40px);
+  }
 }
 
 .check-icon {
@@ -256,18 +441,29 @@ letter-spacing: 0%;
   font-size: 24px;
   font-weight: 700;
   color: #3b1d0a;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 767px) {
+  .modal-title {
+    font-size: 20px;
+  }
 }
 
 .modal-subtitle {
   color: #9ca3af;
   margin-bottom: 20px;
+  font-size: 0.95rem;
 }
 
 .order-total-modal {
   display: flex;
   justify-content: space-between;
   font-size: 16px;
+  font-weight: bold;
   margin: 16px 0;
+  padding: 16px 0;
+  border-top: 1px solid #eee;
 }
 
 .new-order-btn {
@@ -275,41 +471,73 @@ letter-spacing: 0%;
   color: #fff;
   border: none;
   width: 100%;
-  padding: 12px;
+  padding: 14px 12px;
   font-size: 16px;
+  font-weight: 600;
   border-radius: 999px;
   cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 48px;
 }
 
 .new-order-btn:hover {
   background: #b91c1c;
+  transform: translateY(-1px);
 }
 
-
-.ilust-empt{
+.ilust-empt {
+  display: flex;
   justify-content: center;
   width: 80%;
-  margin-left: 25px;
+  margin: 0 auto;
+  opacity: 0.6;
 }
 
-.your-cart{
-font-family: rgb(202, 4, 4) Hat Text;
-color:rgb(202, 4, 4) ;
-font-weight: 700;
-font-style: Bold;
-font-size: font-size/text-preset-2;
-line-height: 100%;
-letter-spacing: 0%;
+@media (max-width: 767px) {
+  .ilust-empt {
+    width: 60%;
+  }
 }
 
-.added-items{
-  font-family: Red Hat Text;
-font-weight: 600;
-font-style: SemiBold;
-font-size: font-size/text-preset-4;
+@media (max-width: 480px) {
+  .app {
+    padding: 8px;
+  }
+  
+  .title {
+    font-size: 1.25rem;
+  }
+  
+  .product-info {
+    padding: 10px;
+  }
+  
+  .cart {
+    padding: 12px;
+  }
+  
+  .modal {
+    padding: 16px;
+    margin: 16px;
+    width: calc(100% - 32px);
+  }
+}
 
-line-height: 100%;
-letter-spacing: 0%;
-text-align: center;
-
+@media (hover: none) {
+  .product-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .add-btn:hover {
+    transform: none;
+  }
+  
+  .confirm-btn:hover {
+    transform: none;
+  }
+  
+  .new-order-btn:hover {
+    transform: none;
+  }
 }
